@@ -16,8 +16,9 @@ public class Day01 {
 
     private int sum;
 
-    public Day01() {
+    Day01() {
         System.out.println("\n--- Day 1: Inverse Captcha ---");
+        // input
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter Input-String: ");
         String input = null;
@@ -29,9 +30,11 @@ public class Day01 {
         if (input == null || "".equals(input)) {
             input = myInput;
         }
+        // wörk
         splitStringPart1(input);
         splitStringPart2(input);
         System.out.println();
+        // finished
     }
 
     public static void main(String[] args) {

@@ -34,6 +34,7 @@ public class Main {
                 System.out.println("\tDay " + day + " not yet implemented!");
                 break;
             case 2:
+                new Day02();
                 break;
             case 3:
                 break;
