@@ -41,7 +41,7 @@ public class Day02 extends Day {
     private int checksum;
 
     public Day02() {
-        System.out.println("\n--- Days.Day 2: Corruption Checksum ---");
+        System.out.println("\n--- Day 2: Corruption Checksum ---");
         // input
         String input = readLines();
         // wörk

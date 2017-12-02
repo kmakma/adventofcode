@@ -1,6 +1,6 @@
 package Days;
 
-public class ${NAME} extends Day {
+public class Day03 extends Day {
 
     /**
      * official input
@@ -11,18 +11,18 @@ public class ${NAME} extends Day {
      */
     private static final String myInput = "";
 
-    public ${NAME}() {
-        System.out.println("\n--- ${NAME}: ____ ---");
+    public Day03() {
+        System.out.println("\n--- Day 3: ____ ---");
         // input
         String input = readLine();
         // wörk
-        // TODO: ${DATE} work with input 
+        // TODO: 02.12.2017 work with input 
         System.out.println();
         // finished
     }
 
     public static void main(String[] args) {
-        new ${NAME}();
+        new Day03();
     }
 
     @Override

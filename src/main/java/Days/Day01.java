@@ -15,7 +15,7 @@ public class Day01 extends Day {
     private int sum;
 
     public Day01() {
-        System.out.println("\n--- Days.Day 1: Inverse Captcha ---");
+        System.out.println("\n--- Day 1: Inverse Captcha ---");
         // input
         String input = readLine();
 

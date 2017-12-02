@@ -1,5 +1,6 @@
 import Days.Day01;
 import Days.Day02;
+import Days.Day03;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,10 +37,11 @@ public class Main {
             case 2:
                 new Day02();
                 break;
+            case 3:
+                new Day03();
+                break;
             default:
                 System.out.println("\tDays.Day " + day + " not yet implemented!");
-                break;
-            case 3:
                 break;
             case 4:
                 break;
