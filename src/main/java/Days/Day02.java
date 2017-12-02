@@ -1,5 +1,7 @@
 package Days;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
@@ -16,7 +18,7 @@ public class Day02 extends Day {
      * <p>
      * solution part one: 21845
      * <p>
-     * solution part two:
+     * solution part two: 191
      */
     private static final String myInput =
             "493\t458\t321\t120\t49\t432\t433\t92\t54\t452\t41\t461\t388\t409\t263\t58\n" +
@@ -41,16 +43,13 @@ public class Day02 extends Day {
     public Day02() {
         System.out.println("\n--- Days.Day 2: Corruption Checksum ---");
         // input
-        // TODO: 02.12.2017 external method for this
-        String input = getDefaultInput();
-        //        String input = readLines();
+        String input = readLines();
         // wörk
         List<List<Integer>> spreadsheet = splitInputToMatrix(input);
         if (spreadsheet != null) {
             calculateChecksumPart1(spreadsheet);
-//            calculateChecksumPart2(spreadsheet);
+            calculateChecksumPart2(spreadsheet);
         }
-        // TODO: 02.12.2017 work with input
         System.out.println();
         // finished
     }
@@ -89,7 +88,8 @@ public class Day02 extends Day {
         return inputLines;
     }
 
-    private List<Integer> splitLineToList(String line) {
+    @Nullable
+    private List<Integer> splitLineToList(@NotNull String line) {
         List<Integer> list = new ArrayList<>();
         String[] splitLine = line.split("\t");
         for (String element : splitLine) {
@@ -110,5 +110,26 @@ public class Day02 extends Day {
         }
         System.out.println("Solution Part One:");
         System.out.println("\t" + checksum);
+    }
+
+    private void calculateChecksumPart2(List<List<Integer>> inputMatrix) {
+        checksum = 0;
+        for (List<Integer> line : inputMatrix) {
+            checksum += findCorrectQuotient(line);
+        }
+        System.out.println("Solution Part Two:");
+        System.out.println("\t" + checksum);
+    }
+
+    @Contract(pure = true)
+    private int findCorrectQuotient(List<Integer> line) {
+        for (int dividend : line) {
+            for (int divisor : line) {
+                if (dividend != divisor && dividend % divisor == 0) {
+                    return dividend / divisor;
+                }
+            }
+        }
+        return 0;
     }
 }
