@@ -1,13 +1,12 @@
 package Days;
 
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Day02 extends Day {
@@ -15,7 +14,7 @@ public class Day02 extends Day {
     /**
      * official input
      * <p>
-     * solution part one:
+     * solution part one: 21845
      * <p>
      * solution part two:
      */
@@ -37,25 +36,20 @@ public class Day02 extends Day {
             "1165\t1119\t194\t280\t223\t1181\t267\t898\t1108\t124\t618\t1135\t817\t997\t129\t227\n" +
             "404\t1757\t358\t2293\t2626\t87\t613\t95\t1658\t147\t75\t930\t2394\t2349\t86\t385";
 
+    private int checksum;
+
     public Day02() {
         System.out.println("\n--- Days.Day 2: Corruption Checksum ---");
         // input
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter Input-String: ");
-        String input = "";
         // TODO: 02.12.2017 external method for this
+        String input = getDefaultInput();
         //        String input = readLines();
-        //        try {
-        //            input = br.readLine();
-        //        } catch (IOException e) {
-        //            e.printStackTrace();
-        //        }
-        if ("".equals(input)) {
-            System.out.println("Official Input will be used.");
-            input = myInput;
-        }
         // wörk
-        System.out.println(Arrays.deepToString(splitInputToMatrix(input)));
+        List<List<Integer>> spreadsheet = splitInputToMatrix(input);
+        if (spreadsheet != null) {
+            calculateChecksumPart1(spreadsheet);
+//            calculateChecksumPart2(spreadsheet);
+        }
         // TODO: 02.12.2017 work with input
         System.out.println();
         // finished
@@ -65,45 +59,56 @@ public class Day02 extends Day {
         new Day02();
     }
 
+
     @Override
     String getDefaultInput() {
         return myInput;
     }
 
-    @NotNull
-    private int[][] splitInputToMatrix(String input) {
+    @Nullable
+    private List<List<Integer>> splitInputToMatrix(String input) {
         BufferedReader bufferedReader = new BufferedReader(new StringReader(input));
         String line;
-        List<int[]> inputLines = new ArrayList<>();
+        List<List<Integer>> inputLines = new ArrayList<>();
         do {
             try {
                 line = bufferedReader.readLine();
             } catch (IOException e) {
                 System.err.println("Days.Day02: IOException while reading string.");
-                return new int[0][0];
+                return null;
             }
             if (line == null) {
                 break;
             }
-            int[] lineArray = splitLineToArray(line);
-            if (lineArray.length == 0) {
-                return new int[0][0];
+            List<Integer> splitLine = splitLineToList(line);
+            if (splitLine == null) {
+                return null;
             }
-            inputLines.add(lineArray);
+            inputLines.add(splitLine);
         } while (!"".equals(line));
-        return inputLines.toArray(new int[inputLines.size()][]);
+        return inputLines;
     }
 
-    private int[] splitLineToArray(String line) {
+    private List<Integer> splitLineToList(String line) {
+        List<Integer> list = new ArrayList<>();
         String[] splitLine = line.split("\t");
-        int[] lineIntegers = new int[splitLine.length];
-        for (int i = 0; i < splitLine.length; i++) {
+        for (String element : splitLine) {
             try {
-                lineIntegers[i] = Integer.parseInt(splitLine[i]);
+                list.add(Integer.parseInt(element));
             } catch (NumberFormatException e) {
-                return new int[0];
+                return null;
             }
         }
-        return lineIntegers;
+        return list;
+    }
+
+    private void calculateChecksumPart1(List<List<Integer>> inputMatrix) {
+        checksum = 0;
+        for (List<Integer> line : inputMatrix) {
+            int difference = Collections.max(line) - Collections.min(line);
+            checksum += difference;
+        }
+        System.out.println("Solution Part One:");
+        System.out.println("\t" + checksum);
     }
 }
