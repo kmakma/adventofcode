@@ -1,3 +1,6 @@
+import Days.Day01;
+import Days.Day02;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,11 +33,11 @@ public class Main {
             case 1:
                 new Day01();
                 break;
-            default:
-                System.out.println("\tDay " + day + " not yet implemented!");
-                break;
             case 2:
                 new Day02();
+                break;
+            default:
+                System.out.println("\tDays.Day " + day + " not yet implemented!");
                 break;
             case 3:
                 break;
@@ -115,7 +118,7 @@ public class Main {
     }
 
     /**
-     * @return Day of Month in New York (0am @ New York = new puzzle)
+     * @return Days.Day of Month in New York (0am @ New York = new puzzle)
      */
     private static int getCurrentDay() {
         return LocalDate.now(zoneId).getDayOfMonth();

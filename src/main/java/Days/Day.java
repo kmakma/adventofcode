@@ -1,15 +1,16 @@
+package Days;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public abstract class MainDay {
+abstract class Day {
 
     abstract String getDefaultInput();
 
-    @NotNull
-    public String readLine() {
+    @NotNull String readLine() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter Input-String: ");
         String input = null;

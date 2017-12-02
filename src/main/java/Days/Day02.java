@@ -1,3 +1,5 @@
+package Days;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Day02 extends MainDay {
+public class Day02 extends Day {
 
     /**
      * official input
@@ -35,8 +37,8 @@ public class Day02 extends MainDay {
             "1165\t1119\t194\t280\t223\t1181\t267\t898\t1108\t124\t618\t1135\t817\t997\t129\t227\n" +
             "404\t1757\t358\t2293\t2626\t87\t613\t95\t1658\t147\t75\t930\t2394\t2349\t86\t385";
 
-    Day02() {
-        System.out.println("\n--- Day 2: Corruption Checksum ---");
+    public Day02() {
+        System.out.println("\n--- Days.Day 2: Corruption Checksum ---");
         // input
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter Input-String: ");
@@ -77,7 +79,7 @@ public class Day02 extends MainDay {
             try {
                 line = bufferedReader.readLine();
             } catch (IOException e) {
-                System.err.println("Day02: IOException while reading string.");
+                System.err.println("Days.Day02: IOException while reading string.");
                 return new int[0][0];
             }
             if (line == null) {

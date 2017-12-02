@@ -4,6 +4,13 @@ import java.io.InputStreamReader;
 
 public class ${NAME} {
 
+    /**
+     * official input
+     * <p>
+     * solution part one: 
+     * <p>
+     * solution part two: 
+     */
     private static final String myInput = "";
 
     ${NAME}() {

@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+package Days;
 
-public class Day01 {
+public class Day01 extends Day {
 
     /**
      * official input
@@ -16,23 +14,14 @@ public class Day01 {
 
     private int sum;
 
-    Day01() {
-        System.out.println("\n--- Day 1: Inverse Captcha ---");
+    public Day01() {
+        System.out.println("\n--- Days.Day 1: Inverse Captcha ---");
         // input
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Enter Input-String: ");
-        String input = null;
-        try {
-            input = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (input == null || "".equals(input)) {
-            input = myInput;
-        }
+        String input = readLine();
+
         // wörk
-        splitStringPart1(input);
-        splitStringPart2(input);
+        splitStringToCharPairsPart1(input);
+        splitStringToCharPairsPart2(input);
         System.out.println();
         // finished
     }
@@ -41,7 +30,12 @@ public class Day01 {
         new Day01();
     }
 
-    private void splitStringPart1(String input) {
+    @Override
+    String getDefaultInput() {
+        return myInput;
+    }
+
+    private void splitStringToCharPairsPart1(String input) {
         sum = 0;
         for (int i = 0; i < input.length() - 1; i++) {
             compareAndSumUp(input.charAt(i), input.charAt(i + 1));
@@ -51,7 +45,7 @@ public class Day01 {
         System.out.println("\t" + sum);
     }
 
-    private void splitStringPart2(String input) {
+    private void splitStringToCharPairsPart2(String input) {
         sum = 0;
         int half = input.length() / 2;
         for (int i = 0; i < input.length(); i++) {
