@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Day04 extends Day {
 
@@ -333,7 +335,8 @@ public class Day04 extends Day {
         // TODO: 06.12.2017 work with input
         List<String[]> inputList = createList(input);
         if (inputList != null && !inputList.isEmpty()) {
-            checkLines(inputList);
+            checkLinesEasy(inputList);
+            checkLinesExpert(inputList);
         }
         System.out.println();
         // finished
@@ -343,10 +346,65 @@ public class Day04 extends Day {
         new Day04();
     }
 
-    private void checkLines(List<String[]> inputList) {
+    private void checkLinesExpert(List<String[]> inputList) {
         int validLines = 0;
         for (String[] line : inputList) {
-            if(checkIfValid(line)) {
+            if (checkIfValidExpert(line)) {
+                validLines++;
+            }
+        }
+        System.out.println("Solution Part Two:");
+        System.out.println("\t" + validLines);
+    }
+
+    private boolean checkIfValidExpert(String[] line) {
+        for (int i = 0; i < line.length; i++) {
+            for (int j = i + 1; j < line.length; j++) {
+                if (line[i].equals(line[j]) || areAnagrams(line[i], line[j])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean areAnagrams(String firstS, String scndS) {
+        if (firstS.length() != scndS.length()) {
+            return false;
+        }
+        char[] first = firstS.toCharArray();
+        char[] scnd = scndS.toCharArray();
+        Map<Character, Integer> charsInFirst = new HashMap<>();
+
+        for (char c : first) {
+            int count;
+            if (charsInFirst.containsKey(c)) {
+                count = charsInFirst.get(c) + 1;
+            } else {
+                count = 1;
+            }
+            charsInFirst.put(c, count);
+        }
+
+        for (char c : scnd) {
+            if (!charsInFirst.containsKey(c)) {
+                return false;
+            }
+            charsInFirst.put(c, charsInFirst.get(c) - 1);
+        }
+
+        for (Integer i : charsInFirst.values()) {
+            if (i != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void checkLinesEasy(List<String[]> inputList) {
+        int validLines = 0;
+        for (String[] line : inputList) {
+            if (checkIfValidEasy(line)) {
                 validLines++;
             }
         }
@@ -354,10 +412,10 @@ public class Day04 extends Day {
         System.out.println("\t" + validLines);
     }
 
-    private boolean checkIfValid(String[] line) {
+    private boolean checkIfValidEasy(String[] line) {
         for (int i = 0; i < line.length; i++) {
-            for(int j = i+1;j<line.length;j++) {
-                if(line[i].equals(line[j])) {
+            for (int j = i + 1; j < line.length; j++) {
+                if (line[i].equals(line[j])) {
                     return false;
                 }
             }
