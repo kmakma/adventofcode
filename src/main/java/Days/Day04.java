@@ -15,7 +15,7 @@ public class Day04 extends Day {
      * <p>
      * solution part one: 451
      * <p>
-     * solution part two: ___
+     * solution part two: 223
      */
     private static final String myInput =
             "vxjtwn vjnxtw sxibvv mmws wjvtxn icawnd rprh\n" + "fhaa qwy vqbq gsswej lxr yzl wakcige mwjrl\n" +
@@ -328,7 +328,7 @@ public class Day04 extends Day {
             "azz ajdcqkd bcafn zaz dcjaqdk gylyzo\n" + "xzvfbf fopmfxu mvftgr mfupoxf coyhof talcc vpkslo";
 
     public Day04() {
-        System.out.println("\n--- Day04: High-Entropy Passphrases ---");
+        System.out.println("\n--- Day 4: High-Entropy Passphrases ---");
         // input
         String input = readLines();
         // wörk

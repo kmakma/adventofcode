@@ -14,7 +14,7 @@ public class Day06 extends Day {
     private static final String myInput = "2\t8\t8\t5\t4\t2\t3\t1\t5\t5\t1\t2\t15\t13\t5\t14";
 
     public Day06() {
-        System.out.println("\n--- Day06: Memory Reallocation ---");
+        System.out.println("\n--- Day 6: Memory Reallocation ---");
         // input
         String input = readLine();
         // wörk
