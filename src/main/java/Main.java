@@ -1,6 +1,4 @@
-import Days.Day01;
-import Days.Day02;
-import Days.Day03;
+import Days.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,50 +38,54 @@ public class Main {
             case 3:
                 new Day03();
                 break;
-            default:
-                System.out.println("\tDays.Day " + day + " not yet implemented!");
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
+//            case 4:
+// new Day04();
+//                break;
+//            case 5:
+// new Day05();
+//                break;
             case 6:
+                new Day06();
                 break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
-            case 12:
-                break;
-            case 13:
-                break;
-            case 14:
-                break;
-            case 15:
-                break;
-            case 16:
-                break;
-            case 17:
-                break;
-            case 18:
-                break;
-            case 19:
-                break;
-            case 20:
-                break;
-            case 21:
-                break;
-            case 22:
-                break;
-            case 23:
-                break;
-            case 24:
+//            case 7:
+// new Day07();
+//                break;
+//            case 8:
+//                break;
+//            case 9:
+//                break;
+//            case 10:
+//                break;
+//            case 11:
+//                break;
+//            case 12:
+//                break;
+//            case 13:
+//                break;
+//            case 14:
+//                break;
+//            case 15:
+//                break;
+//            case 16:
+//                break;
+//            case 17:
+//                break;
+//            case 18:
+//                break;
+//            case 19:
+//                break;
+//            case 20:
+//                break;
+//            case 21:
+//                break;
+//            case 22:
+//                break;
+//            case 23:
+//                break;
+//            case 24:
+//                break;
+            default:
+                System.out.println("\tDay " + day + " not yet implemented!");
                 break;
         }
         return true;
