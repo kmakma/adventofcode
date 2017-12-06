@@ -73,7 +73,7 @@ public class Day02 extends Day {
             try {
                 line = bufferedReader.readLine();
             } catch (IOException e) {
-                System.err.println("Days.Day02: IOException while reading string.");
+                System.err.println("Day02: IOException while reading string.");
                 return null;
             }
             if (line == null) {
