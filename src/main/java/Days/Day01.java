@@ -55,17 +55,6 @@ public class Day01 extends Day {
         System.out.println("\t" + sum);
     }
 
-    private int normalizeIndex(int index, int arrayLength) {
-        int normIndex = index;
-        while (normIndex >= arrayLength) {
-            normIndex -= arrayLength;
-        }
-        while (normIndex < 0) {
-            normIndex += arrayLength;
-        }
-        return normIndex;
-    }
-
     private void compareAndSumUp(char c, char c1) {
         if (c == c1) {
             sum += Character.getNumericValue(c);

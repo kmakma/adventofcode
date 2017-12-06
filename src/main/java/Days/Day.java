@@ -30,6 +30,17 @@ abstract class Day {
         return input;
     }
 
+    int normalizeIndex(int index, int size) {
+        int normIndex = index;
+        while (normIndex >= size) {
+            normIndex -= size;
+        }
+        while (normIndex < 0) {
+            normIndex += size;
+        }
+        return normIndex;
+    }
+
     @NotNull String readLines() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter multiline Input-String (finish with empty line):");
