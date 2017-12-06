@@ -38,11 +38,11 @@ public class Main {
             case 3:
                 new Day03();
                 break;
-//            case 4:
-// new Day04();
-//                break;
+            case 4:
+                new Day04();
+                break;
 //            case 5:
-// new Day05();
+//                new Day05();
 //                break;
             case 6:
                 new Day06();
