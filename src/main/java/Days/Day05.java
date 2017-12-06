@@ -1,5 +1,7 @@
 package Days;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Day05 extends Day {
 
     /**
@@ -164,6 +166,7 @@ public class Day05 extends Day {
         return intArr;
     }
 
+    @NotNull
     @Override
     String getDefaultInput() {
         return myInput;

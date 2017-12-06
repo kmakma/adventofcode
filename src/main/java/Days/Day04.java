@@ -1,5 +1,7 @@
 package Days;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -442,6 +444,7 @@ public class Day04 extends Day {
         return inputList;
     }
 
+    @NotNull
     @Override
     String getDefaultInput() {
         return myInput;

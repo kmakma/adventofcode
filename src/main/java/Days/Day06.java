@@ -1,5 +1,7 @@
 package Days;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class Day06 extends Day {
@@ -75,6 +77,7 @@ public class Day06 extends Day {
         return list;
     }
 
+    @NotNull
     @Override
     String getDefaultInput() {
         return myInput;

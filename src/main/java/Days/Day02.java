@@ -59,6 +59,7 @@ public class Day02 extends Day {
     }
 
 
+    @NotNull
     @Override
     String getDefaultInput() {
         return myInput;
