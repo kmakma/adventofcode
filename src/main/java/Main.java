@@ -41,9 +41,9 @@ public class Main {
             case 4:
                 new Day04();
                 break;
-//            case 5:
-//                new Day05();
-//                break;
+            case 5:
+                new Day05();
+                break;
             case 6:
                 new Day06();
                 break;
