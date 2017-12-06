@@ -49,6 +49,7 @@ abstract class Day {
         do {
             if (line != null) {
                 input.append(line);
+                input.append("\n");
             }
             try {
                 line = br.readLine();
