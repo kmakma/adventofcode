@@ -3,16 +3,19 @@ package Days;
 import Days.tools.RegisterInstruction;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Day08 extends Day {
 
     /**
      * official input
      * <p>
-     * solution part one: ___
+     * solution part one: 4448
      * <p>
-     * solution part two: ___
+     * solution part two: 6582
      */
     private static final String myInput =
             "o dec -427 if wnh < -1\n" + "ugc dec -128 if baj <= 3\n" + "ugc inc 294 if xml <= -1\n" +
@@ -349,19 +352,74 @@ public class Day08 extends Day {
             "jyi inc 71 if xbp < 34\n" + "pp inc 598 if xbp <= 42\n" + "az inc 143 if wnh == -832\n" +
             "xml dec 13 if baj > -2227\n" + "ugc inc -643 if az >= 1200";
 
+    private final Map<String, Integer> registers = new HashMap<>();
+    private int largestValueEver = 0;
+
     public Day08() {
         System.out.println("\n--- Day 8: I Heard You Like Registers ---");
         // input
-        List<RegisterInstruction> regInstr = (List<RegisterInstruction>) parseInputLines(Return.REG_INSTR);
+        @SuppressWarnings("unchecked") List<RegisterInstruction> regInstr = (List<RegisterInstruction>) parseInputLines(
+                Return.REG_INSTR);
         // wörk
-        // TODO: 09.12.2017 work with input
-
+        if (regInstr != null) {
+            executeInstructions(regInstr);
+        }
         System.out.println();
         // finished
     }
 
     public static void main(String[] args) {
         new Day08();
+    }
+
+    private void executeInstructions(List<RegisterInstruction> regInstr) {
+        for (RegisterInstruction instruction : regInstr) {
+            if (checkCondition(instruction)) {
+                executeOperation(instruction);
+            }
+        }
+        Integer largestValue = Collections.max(registers.values());
+        System.out.println("Solution Part One:");
+        System.out.println("\t" + largestValue);
+        System.out.println("Solution Part Two:");
+        System.out.println("\t" + largestValueEver);
+    }
+
+    private void executeOperation(RegisterInstruction instruction) {
+        int oldValue = getRegisterValue(instruction.getModifyRegister());
+        int newValue = oldValue + (instruction.getModifyingOperation() * instruction.getChangeRegisterBy());
+        if (newValue > largestValueEver) {
+            largestValueEver = newValue;
+        }
+        registers.put(instruction.getModifyRegister(), newValue);
+    }
+
+    private boolean checkCondition(RegisterInstruction instruction) {
+        int registerValue = getRegisterValue(instruction.getConditionRegister());
+        int compareValue = instruction.getConditionCompareValue();
+        switch (instruction.getConditionOperator()) {
+            case EQUAL:
+                return registerValue == compareValue;
+            case NOT_EQUAL:
+                return registerValue != compareValue;
+            case GREATER:
+                return registerValue > compareValue;
+            case LESS:
+                return registerValue < compareValue;
+            case GREATER_EQUAL:
+                return registerValue >= compareValue;
+            case LESS_EQUAL:
+                return registerValue <= compareValue;
+        }
+        return false;
+    }
+
+    private int getRegisterValue(String register) {
+        Integer registerValue = registers.putIfAbsent(register, 0);
+        if (registerValue == null) {
+            registerValue = 0;
+        }
+        return registerValue;
     }
 
     @NotNull
