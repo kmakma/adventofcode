@@ -50,39 +50,59 @@ public class Main {
             case 7:
                 new Day07();
                 break;
-//            case 8:
-//                break;
+            case 8:
+                new Day08();
+                break;
 //            case 9:
+//                new Day09();
 //                break;
 //            case 10:
+//                new Day10();
 //                break;
 //            case 11:
+//                new Day11();
 //                break;
 //            case 12:
+//                new Day12();
 //                break;
 //            case 13:
+//                new Day13();
 //                break;
 //            case 14:
+//                new Day14();
 //                break;
 //            case 15:
+//                new Day15();
 //                break;
 //            case 16:
+//                new Day16();
 //                break;
 //            case 17:
+//                new Day17();
 //                break;
 //            case 18:
+//                new Day18();
 //                break;
 //            case 19:
+//                new Day19();
 //                break;
 //            case 20:
+//                new Day20();
 //                break;
 //            case 21:
+//                new Day21();
 //                break;
 //            case 22:
+//                new Day22();
 //                break;
 //            case 23:
+//                new Day23();
 //                break;
 //            case 24:
+//                new Day24();
+//                break;
+//            case 25:
+//                new Day25();
 //                break;
             default:
                 System.out.println("\tDay " + day + " not yet implemented!");

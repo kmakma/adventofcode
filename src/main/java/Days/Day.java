@@ -1,12 +1,16 @@
 package Days;
 
+import Days.tools.RegisterInstruction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 abstract class Day {
 
@@ -29,7 +33,7 @@ abstract class Day {
     /**
      * @param returnType available types: {@link Return#CHAR_ARRAY}, {@link Return#INT_ARRAY}
      */
-    @Nullable Object parseInput(Return returnType) {
+    @Nullable Object parseInputLine(Return returnType) {
         String input = readLine();
 
         switch (returnType) {
@@ -40,6 +44,40 @@ abstract class Day {
             default:
                 return null;
         }
+    }
+
+    @Nullable Object parseInputLines(Return returnType) {
+        String input = readLines();
+
+        switch (returnType) {
+            case REG_INSTR:
+                return linesToRegisterInstructions(input);
+            default:
+                return null;
+        }
+    }
+
+    private List<RegisterInstruction> linesToRegisterInstructions(String input) {
+        List<RegisterInstruction> regInstrs = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new StringReader(input));
+
+        String line;
+        while (true) {
+            try {
+                line = br.readLine();
+            } catch (IOException e) {
+                System.err.println(getClass() + ": Error while reading line!");
+                return null;
+            }
+            if (line != null && !"".equals(line)) {
+                regInstrs.add(RegisterInstruction.parse(line));
+            } else {
+                break;
+            }
+        }
+
+        return regInstrs;
+
     }
 
     @Nullable
@@ -83,7 +121,7 @@ abstract class Day {
 
     @NotNull String readLines() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter multiline Input-String (finish with empty line):");
+        System.out.println("Enter multiline Input (finish with empty line):");
         StringBuilder input = new StringBuilder();
         String line = null;
         do {
@@ -97,12 +135,10 @@ abstract class Day {
                 e.printStackTrace();
             }
         } while (!(line == null || "".equals(line)));
-        // TODO: 02.12.2017 prüfe wie neue zeilen dargestellt werden
-        //        System.out.println(input.toString());
         return decideIfOfficialInput(input.toString());
     }
 
     enum Return {
-        CHAR_ARRAY, INT_ARRAY
+        CHAR_ARRAY, REG_INSTR, INT_ARRAY
     }
 }
