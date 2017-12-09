@@ -1,5 +1,9 @@
 package Days;
 
+import Days.tools.Node;
+import Days.tools.SupremeTree;
+import org.jetbrains.annotations.NotNull;
+
 public class Day07 extends Day {
 
     /**
@@ -7,7 +11,7 @@ public class Day07 extends Day {
      * <p>
      * solution part one: mwzaxaj
      * <p>
-     * solution part two: ___
+     * solution part two: 1219
      */
     private static final String myInput =
             "yvpwz (50)\n" + "vfosh (261) -> aziwd, tubze, dhjrv\n" + "xtvawvt (19)\n" + "nspsk (24)\n" +
@@ -361,10 +365,10 @@ public class Day07 extends Day {
     public Day07() {
         System.out.println("\n--- Day 7: Recursive Circus ---");
         // input
-        String input = readLine();
+        SupremeTree supremeTree = new SupremeTree(readLines());
         // wörk
-        // TODO: 07.12.2017 work with input
-        cheatTheSystem();
+        findRoot(supremeTree);
+        findCorrectWeight(supremeTree);
         System.out.println();
         // finished
     }
@@ -373,29 +377,19 @@ public class Day07 extends Day {
         new Day07();
     }
 
-    private void cheatTheSystem() {
-        String[] lines = getDefaultInput().split("\n");
-        String[][] divided = new String[lines.length][];
-        for (int i = 0; i < lines.length; i++) {
-            divided[i] = lines[i].split(" ", 2);
-        }
-        for (int i = 0; i < divided.length; i++) {
-            if(!doesContain(divided, i)) {
-                System.out.println(divided[i][0]);
-            }
-        }
+    private void findRoot(SupremeTree supremeTree) {
+        Node node = supremeTree.getRoot();
+        System.out.println("Solution Part One:");
+        System.out.println("\t" + node.getLabel());
     }
 
-    private boolean doesContain(String[][] divided, int i) {
-        String main = divided[i][0];
-        for (String[] aDivided : divided) {
-            if (aDivided[1].contains(main)) {
-                return true;
-            }
-        }
-        return false;
+    private void findCorrectWeight(SupremeTree tree) {
+        int newWeight = tree.findCorrectWeigth();
+        System.out.println("Solution Part Two:");
+        System.out.println("\t" + newWeight);
     }
 
+    @NotNull
     @Override
     String getDefaultInput() {
         return myInput;

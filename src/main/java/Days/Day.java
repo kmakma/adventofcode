@@ -27,12 +27,12 @@ abstract class Day {
     }
 
     /**
-     * @param outputType available types: {@link Output#CHAR_ARRAY}, {@link Output#INT_ARRAY}
+     * @param returnType available types: {@link Return#CHAR_ARRAY}, {@link Return#INT_ARRAY}
      */
-    @Nullable Object parseInput(Output outputType) {
+    @Nullable Object parseInput(Return returnType) {
         String input = readLine();
 
-        switch (outputType) {
+        switch (returnType) {
             case CHAR_ARRAY:
                 return lineToCharObjectArray(input);
             case INT_ARRAY:
@@ -102,7 +102,7 @@ abstract class Day {
         return decideIfOfficialInput(input.toString());
     }
 
-    enum Output {
+    enum Return {
         CHAR_ARRAY, INT_ARRAY
     }
 }
