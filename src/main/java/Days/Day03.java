@@ -3,16 +3,14 @@ package Days;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * solution part one: 480
+ * <p>
+ * solution part two: 349975
+ *
+ * @see <a href="http://adventofcode.com/2017/day/3">Advent of Code: Day 3</a>
+ */
 public class Day03 extends Day {
-
-    /**
-     * official input
-     * <p>
-     * solution part one: 480
-     * <p>
-     * solution part two: 349975
-     */
-    private static final String myInput = "347991";
 
     public Day03() {
         System.out.println("\n--- Day 3: Spiral Memory ---");
@@ -35,7 +33,7 @@ public class Day03 extends Day {
     @NotNull
     @Override
     String getDefaultInput() {
-        return myInput;
+        return MyInput.DAY03.getInput();
     }
 
     private int parseInput(String input) {

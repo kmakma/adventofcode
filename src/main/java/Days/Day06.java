@@ -4,16 +4,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+/**
+ * solution part one: 3156
+ * <p>
+ * solution part two: 1610
+ *
+ * @see <a href="http://adventofcode.com/2017/day/10">Advent of Code: Day 10</a>
+ */
 public class Day06 extends Day {
-
-    /**
-     * official input
-     * <p>
-     * solution part one: 3156
-     * <p>
-     * solution part two: 1610
-     */
-    private static final String myInput = "2\t8\t8\t5\t4\t2\t3\t1\t5\t5\t1\t2\t15\t13\t5\t14";
 
     public Day06() {
         System.out.println("\n--- Day 6: Memory Reallocation ---");
@@ -80,6 +78,6 @@ public class Day06 extends Day {
     @NotNull
     @Override
     String getDefaultInput() {
-        return myInput;
+        return MyInput.DAY06.getInput();
     }
 }
