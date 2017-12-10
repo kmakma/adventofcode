@@ -14,6 +14,9 @@ import java.util.List;
 
 abstract class Day {
 
+    static final String REGEX_NOTHING = "";
+    static final String REGEX_COMMA = ",";
+
     @NotNull
     abstract String getDefaultInput();
 
@@ -62,9 +65,27 @@ abstract class Day {
         // TODO: 10.12.2017
     }
 
-    @Nullable int[] lineToIntArray() {
-        String line = readLine();
-        int[] intArray = Arrays.stream(line.split("")).mapToInt(Integer::valueOf).toArray();
+    @Nullable int[] lineToAsciiIntArray(String line) {
+        char[] charArray = line.toCharArray();
+        if (charArray.length > 0) {
+            int[] intArray = new int[charArray.length];
+            for (int i = 0; i < charArray.length; i++) {
+                intArray[i] = charArray[i];
+            }
+            return intArray;
+        }
+        return null;
+    }
+
+    @Nullable int[] lineToIntArray(String splitRegex) {
+        return lineToIntArray(null, splitRegex);
+    }
+
+    @Nullable int[] lineToIntArray(String line, String splitRegex) {
+        if (line == null) {
+            line = readLine();
+        }
+        int[] intArray = Arrays.stream(line.split(splitRegex)).mapToInt(Integer::valueOf).toArray();
         if (intArray.length > 0) {
             return intArray;
         }
