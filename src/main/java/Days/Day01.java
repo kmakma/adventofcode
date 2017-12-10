@@ -14,7 +14,7 @@ public class Day01 extends Day {
     public Day01() {
         System.out.println("\n--- Day 1: Inverse Captcha ---");
         // input
-        int[] input = (int[]) parseInputLine(Return.INT_ARRAY);
+        int[] input = lineToIntArray();
         // wörk
         if (input != null) {
             compareSuccessivePairs(input);

@@ -30,34 +30,11 @@ abstract class Day {
         return decideIfOfficialInput(input);
     }
 
-    /**
-     * @param returnType available types: {@link Return#CHAR_ARRAY}, {@link Return#INT_ARRAY}
-     */
-    @Nullable Object parseInputLine(Return returnType) {
-        String input = readLine();
+    @Nullable List<RegisterInstruction> linesToRegisterInstructions() {
+        // TODO: 10.12.2017
+//        List<String> input = readLines();
+        String input = readLinesToString();
 
-        switch (returnType) {
-            case CHAR_ARRAY:
-                return lineToCharObjectArray(input);
-            case INT_ARRAY:
-                return lineToIntArray(input);
-            default:
-                return null;
-        }
-    }
-
-    @Nullable Object parseInputLines(Return returnType) {
-        String input = readLines();
-
-        switch (returnType) {
-            case REG_INSTR:
-                return linesToRegisterInstructions(input);
-            default:
-                return null;
-        }
-    }
-
-    private List<RegisterInstruction> linesToRegisterInstructions(String input) {
         List<RegisterInstruction> regInstrs = new ArrayList<>();
         BufferedReader br = new BufferedReader(new StringReader(input));
 
@@ -80,11 +57,25 @@ abstract class Day {
 
     }
 
-    @Nullable
-    private int[] lineToIntArray(@NotNull String line) {
+    private List<String> readLines() {
+        return null;
+        // TODO: 10.12.2017
+    }
+
+    @Nullable int[] lineToIntArray() {
+        String line = readLine();
         int[] intArray = Arrays.stream(line.split("")).mapToInt(Integer::valueOf).toArray();
         if (intArray.length > 0) {
             return intArray;
+        }
+        return null;
+    }
+
+    @Nullable char[] lineToCharArray() {
+        String line = readLine();
+        char[] charArray = line.toCharArray();
+        if (charArray.length > 0) {
+            return charArray;
         }
         return null;
     }
@@ -119,7 +110,7 @@ abstract class Day {
         return normIndex;
     }
 
-    @NotNull String readLines() {
+    @NotNull String readLinesToString() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter multiline Input (finish with empty line):");
         StringBuilder input = new StringBuilder();
@@ -136,9 +127,5 @@ abstract class Day {
             }
         } while (!(line == null || "".equals(line)));
         return decideIfOfficialInput(input.toString());
-    }
-
-    enum Return {
-        CHAR_ARRAY, REG_INSTR, INT_ARRAY
     }
 }

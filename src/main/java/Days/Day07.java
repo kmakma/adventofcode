@@ -17,7 +17,7 @@ public class Day07 extends Day {
     public Day07() {
         System.out.println("\n--- Day 7: Recursive Circus ---");
         // input
-        SupremeTree supremeTree = new SupremeTree(readLines());
+        SupremeTree supremeTree = new SupremeTree(readLinesToString());
         // wörk
         findRoot(supremeTree);
         findCorrectWeight(supremeTree);

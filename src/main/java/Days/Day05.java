@@ -14,7 +14,7 @@ public class Day05 extends Day {
     public Day05() {
         System.out.println("\n--- Day 5: A Maze of Twisty Trampolines, All Alike ---");
         // input
-        String input = readLines();
+        String input = readLinesToString();
         // wörk
         int[] inputArr = inputToArray(input);
         if (inputArr != null) {

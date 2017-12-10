@@ -25,7 +25,7 @@ public class Day02 extends Day {
     public Day02() {
         System.out.println("\n--- Day 2: Corruption Checksum ---");
         // input
-        String input = readLines();
+        String input = readLinesToString();
         // wörk
         List<List<Integer>> spreadsheet = splitInputToMatrix(input);
         if (spreadsheet != null) {

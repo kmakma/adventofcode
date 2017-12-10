@@ -22,7 +22,7 @@ public class Day04 extends Day {
     public Day04() {
         System.out.println("\n--- Day 4: High-Entropy Passphrases ---");
         // input
-        String input = readLines();
+        String input = readLinesToString();
         // wörk
         // TODO: 06.12.2017 work with input
         List<String[]> inputList = createList(input);

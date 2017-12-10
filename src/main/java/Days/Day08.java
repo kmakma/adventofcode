@@ -23,8 +23,7 @@ public class Day08 extends Day {
     public Day08() {
         System.out.println("\n--- Day 8: I Heard You Like Registers ---");
         // input
-        @SuppressWarnings("unchecked") List<RegisterInstruction> regInstr = (List<RegisterInstruction>) parseInputLines(
-                Return.REG_INSTR);
+        List<RegisterInstruction> regInstr = linesToRegisterInstructions();
         // wörk
         if (regInstr != null) {
             executeInstructions(regInstr);
