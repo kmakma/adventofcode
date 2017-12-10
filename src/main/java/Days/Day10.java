@@ -2,6 +2,8 @@ package Days;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 /**
  * solution part one: ___
  * <p>
@@ -20,21 +22,71 @@ public class Day10 extends Day {
         int[] inputOne = lineToIntArray(inputLine, REGEX_COMMA);
         int[] inputTwo = lineToAsciiIntArray(inputLine);
         // wörk
-        // TODO: 09.12.2017 work with input
         if (inputOne != null) {
             doEasyHash(inputOne);
         }
-        if(inputTwo!=null) {
-//            int[] sparseHash = doSparseHash(inputTwo);
-
+        if (inputTwo != null) {
+            inputTwo = addSuffix(inputTwo);
+            int[] denseHash = getDenseHash(inputTwo);
+            printDenseHashToHex(denseHash);
         }
-
         System.out.println();
         // finished
     }
 
     public static void main(String[] args) {
         new Day10();
+    }
+
+    private void printDenseHashToHex(int[] denseHash) {
+        StringBuilder sb = new StringBuilder();
+        for (int hash : denseHash) {
+            sb.append(String.format("%02X", hash));
+        }
+
+        System.out.println("Solution Part Two:");
+        System.out.println("\t" + sb.toString());
+    }
+
+    private int[] getDenseHash(int[] input) {
+        doSparseHash(input);
+        int[] denseHash = new int[theList.length / 16];
+        for (int i = 0; i < theList.length / 16; i++) {
+            denseHash[i] = useBitwiseXOR(Arrays.copyOfRange(theList, 16 * i, 16 * i + 16));
+        }
+        return denseHash;
+    }
+
+    private int useBitwiseXOR(int[] array) {
+        int result = array[0];
+        for (int i = 1; i < array.length; i++) {
+            result ^= array[i];
+        }
+        return result;
+    }
+
+    private void doSparseHash(int[] input) {
+        int currentPosition = 0;
+        int jumpSize = 0;
+        theList = new int[256];
+        for (int i = 0; i < theList.length; i++) {
+            theList[i] = i;
+        }
+        for (int i = 0; i < 64; i++) {
+            for (int length : input) {
+                reverseSubarray(currentPosition, length);
+                currentPosition = normalizeIndex(currentPosition + length + jumpSize, theList.length);
+                jumpSize++;
+            }
+        }
+    }
+
+    private int[] addSuffix(int[] input) {
+        int[] suffix = {17, 31, 73, 47, 23};
+        int[] newArray = new int[input.length + suffix.length];
+        System.arraycopy(input, 0, newArray, 0, input.length);
+        System.arraycopy(suffix, 0, newArray, input.length, suffix.length);
+        return newArray;
     }
 
     private void doEasyHash(int[] input) {
