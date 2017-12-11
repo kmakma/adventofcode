@@ -101,6 +101,12 @@ abstract class Day {
         return null;
     }
 
+    @NotNull List<String> lineToStringList(String splitRegex) {
+        String line = readLine();
+        String[] stringArray = line.split(splitRegex);
+        return new ArrayList<>(Arrays.asList(stringArray));
+    }
+
     @Nullable
     private Character[] lineToCharObjectArray(@NotNull String line) {
 //        Character[] cOArray =  Arrays.stream(line.split("")).map(s -> s.charAt(0)).toArray(Character[]::new);
