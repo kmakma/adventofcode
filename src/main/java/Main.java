@@ -65,9 +65,9 @@ public class Main {
 //            case 12:
 //                new Day12();
 //                break;
-//            case 13:
-//                new Day13();
-//                break;
+            case 13:
+                new Day13();
+                break;
 //            case 14:
 //                new Day14();
 //                break;

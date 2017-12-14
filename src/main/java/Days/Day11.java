@@ -5,9 +5,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * solution part one: ___
+ * solution part one: 687
  * <p>
- * solution part two: ___
+ * solution part two: 1483
  *
  * @see <a href="http://adventofcode.com/2017/day/11">Advent of Code: Day 11</a>
  */

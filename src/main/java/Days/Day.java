@@ -8,9 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 abstract class Day {
 
@@ -31,33 +29,6 @@ abstract class Day {
             input = null;
         }
         return decideIfOfficialInput(input);
-    }
-
-    @Nullable List<RegisterInstruction> linesToRegisterInstructions() {
-        // TODO: 10.12.2017
-//        List<String> input = readLines();
-        String input = readLinesToString();
-
-        List<RegisterInstruction> regInstrs = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new StringReader(input));
-
-        String line;
-        while (true) {
-            try {
-                line = br.readLine();
-            } catch (IOException e) {
-                System.err.println(getClass() + ": Error while reading line!");
-                return null;
-            }
-            if (line != null && !"".equals(line)) {
-                regInstrs.add(RegisterInstruction.parse(line));
-            } else {
-                break;
-            }
-        }
-
-        return regInstrs;
-
     }
 
     private List<String> readLines() {
@@ -115,6 +86,62 @@ abstract class Day {
             return charObjectArray;
         }
         return null;
+    }
+
+    @Nullable Map<Integer,Integer> linesToIntMap() {
+        String input = readLinesToString();
+
+        BufferedReader br = new BufferedReader(new StringReader(input));
+        Map<Integer,Integer> inputMap = new HashMap<>();
+
+        String line;
+        while (true) {
+            try {
+                line = br.readLine();
+            } catch (IOException e) {
+                System.err.println(getClass() + ": Error while reading line!");
+                return null;
+            }
+            if (line != null && !"".equals(line)) {
+                String[] splitLine = line.split(": ");
+                try {
+                    inputMap.put(Integer.parseInt(splitLine[0]), Integer.parseInt(splitLine[1]));
+
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            } else {
+                break;
+            }
+        }
+        return inputMap;
+    }
+
+    @Nullable List<RegisterInstruction> linesToRegisterInstructions() {
+        // TODO: 10.12.2017
+//        List<String> input = readLines();
+        String input = readLinesToString();
+
+        List<RegisterInstruction> regInstrs = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new StringReader(input));
+
+        String line;
+        while (true) {
+            try {
+                line = br.readLine();
+            } catch (IOException e) {
+                System.err.println(getClass() + ": Error while reading line!");
+                return null;
+            }
+            if (line != null && !"".equals(line)) {
+                regInstrs.add(RegisterInstruction.parse(line));
+            } else {
+                break;
+            }
+        }
+
+        return regInstrs;
+
     }
 
     @NotNull
