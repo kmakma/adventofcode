@@ -2,25 +2,19 @@ package Days;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * solution part one: 1928
  * <p>
- * solution part two: ___
+ * solution part two: 3830344
  *
  * @see <a href="http://adventofcode.com/2017/day/13">Advent of Code: Day 13</a>
  */
 public class Day13 extends Day {
 
     private Map<Integer, Integer> scannerRanges;
-    private Map<Integer, Integer> scannerPositions;
-    private Map<Integer, Integer> scannerDirections;
-    private int currentDepth;
-    private int severity = -1;
-    private boolean caught;
 
     public Day13() {
         System.out.println("\n--- Day13: Packet Scanners ---");
@@ -40,78 +34,46 @@ public class Day13 extends Day {
     }
 
     private void checkInstantTripSeverity() {
-        initializeScanners();
-        checkTripSeverity();
+        int severity = checkTripSeverity(0);
+        if (severity < 0) {
+            severity = 0;
+        }
         System.out.println("Solution Part One:");
         System.out.println("\t" + severity);
     }
 
     private void calculateDelayTime() {
         int delay = -1;
-        severity = -1;
-        boolean caught = false;
-        while (severity != 0 || caught) {
+        int severity = 0;
+        while (severity != -1) {
             delay++;
-            initializeScanners();
-            delayBy(delay);
-            caught = checkTripSeverity();
-            if(severity== 0) {
-                System.out.println("severity:"+severity+"caught:"+caught);
-            }
-            if(!caught) {
-                System.out.println("severity:"+severity+"*caught*:"+caught);
-            }
+            severity = checkTripSeverity(delay);
         }
         System.out.println("Solution Part Two:");
         System.out.println("\t" + delay);
     }
 
-    private void delayBy(int delay) {
-        for (int i = 0; i < delay; i++) {
-            moveScanners();
+    private int checkTripSeverity(int delay) {
+        Map<Integer, Boolean> scannerRootPositions = new HashMap<>();
+        for (Map.Entry<Integer, Integer> scanner : scannerRanges.entrySet()) {
+            int range = scanner.getValue();
+            int position = (scanner.getKey() + delay) % ((range - 1) * 2);
+            scannerRootPositions.put(scanner.getKey(), position == 0);
         }
+        return calculateSeverity(scannerRootPositions);
     }
 
-    private boolean checkTripSeverity() {
-        int depth = Collections.max(scannerRanges.keySet());
-        currentDepth = -1;
-        severity = 0;
-        caught = false;
-        for (int i = 0; i <= depth; i++) {
-            currentDepth++;
-            checkSeverity();
-            moveScanners();
-        }
-        return caught;
-    }
-
-    private void initializeScanners() {
-        scannerPositions = new HashMap<>();
-        scannerDirections = new HashMap<>();
-        for (int scannerDepth : scannerRanges.keySet()) {
-            scannerPositions.put(scannerDepth, 0);
-            scannerDirections.put(scannerDepth, 1);
-        }
-    }
-
-    private void moveScanners() {
-        for (int scannerDepth : scannerPositions.keySet()) {
-            int newPos = scannerPositions.get(scannerDepth) + scannerDirections.get(scannerDepth);
-            scannerPositions.put(scannerDepth, newPos);
-            if (newPos == scannerRanges.get(scannerDepth) - 1) {
-                scannerDirections.put(scannerDepth, -1);
-            } else if (newPos == 0) {
-                scannerDirections.put(scannerDepth, 1);
+    private int calculateSeverity(Map<Integer, Boolean> scannerRootPositions) {
+        int severity = 0;
+        for (Map.Entry<Integer, Boolean> scanner : scannerRootPositions.entrySet()) {
+            if (scanner.getValue()) {
+                severity += scanner.getKey() * scannerRanges.get(scanner.getKey());
             }
         }
-    }
-
-    private void checkSeverity() {
-        int scannerPosition = scannerPositions.getOrDefault(currentDepth, -1);
-        if (scannerPosition == 0) {
-            severity += currentDepth * scannerRanges.get(currentDepth);
-            caught = true;
+        if (severity == 0 && !scannerRootPositions.get(0)) {
+            return -1;
         }
+        return severity;
     }
 
     @NotNull
