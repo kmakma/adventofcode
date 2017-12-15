@@ -1,6 +1,7 @@
 package Days;
 
 import Days.tools.RegisterInstruction;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -88,11 +89,11 @@ abstract class Day {
         return null;
     }
 
-    @Nullable Map<Integer,Integer> linesToIntMap() {
+    @Nullable Map<Integer, Integer> linesToIntMap() {
         String input = readLinesToString();
 
         BufferedReader br = new BufferedReader(new StringReader(input));
-        Map<Integer,Integer> inputMap = new HashMap<>();
+        Map<Integer, Integer> inputMap = new HashMap<>();
 
         String line;
         while (true) {
@@ -162,6 +163,103 @@ abstract class Day {
             normIndex += size;
         }
         return normIndex;
+    }
+
+    String knotHashAsciiIntArrayToHex(int[] asciiArray) {
+        int[] withSuffix = addSuffix(asciiArray);
+        int[] denseHash = getDenseHash(withSuffix);
+        return parseDenseHashToHex(denseHash);
+    }
+
+    private int[] addSuffix(int[] input) {
+        int[] suffix = {17, 31, 73, 47, 23};
+        int[] newArray = new int[input.length + suffix.length];
+        System.arraycopy(input, 0, newArray, 0, input.length);
+        System.arraycopy(suffix, 0, newArray, input.length, suffix.length);
+        return newArray;
+    }
+
+    private int[] getDenseHash(int[] input) {
+        int[] sparseHash = getSparseHash(input);
+        int[] denseHash = new int[sparseHash.length / 16];
+        for (int i = 0; i < sparseHash.length / 16; i++) {
+            denseHash[i] = useBitwiseXOR(Arrays.copyOfRange(sparseHash, 16 * i, 16 * i + 16));
+        }
+        return denseHash;
+    }
+
+    private int[] getSparseHash(int[] input) {
+        int currentPosition = 0;
+        int jumpSize = 0;
+        int[] sparseHash = new int[256];
+        for (int i = 0; i < sparseHash.length; i++) {
+            sparseHash[i] = i;
+        }
+        for (int i = 0; i < 64; i++) {
+            for (int length : input) {
+                reverseSubarrayOf(sparseHash, currentPosition, length);
+                currentPosition = normalizeIndex(currentPosition + length + jumpSize, sparseHash.length);
+                jumpSize++;
+            }
+        }
+        return sparseHash;
+    }
+
+    void reverseSubarrayOf(int[] array, int startIndex, int length) {
+        for (int i = 0; i < length / 2; i++) {
+            int fstI = normalizeIndex(i + startIndex, array.length);
+            int sndI = normalizeIndex(startIndex + length - 1 - i, array.length);
+
+            int temp = array[fstI];
+            array[fstI] = array[sndI];
+            array[sndI] = temp;
+        }
+    }
+
+    @Contract(pure = true)
+    private int useBitwiseXOR(@NotNull int[] array) {
+        int result = array[0];
+        for (int i = 1; i < array.length; i++) {
+            result ^= array[i];
+        }
+        return result;
+    }
+
+    @NotNull
+    private String parseDenseHashToHex(@NotNull int[] denseHash) {
+        StringBuilder sb = new StringBuilder();
+        for (int hash : denseHash) {
+            sb.append(String.format("%02X", hash));
+        }
+        return sb.toString();
+    }
+
+    String parseHexStringToBinString(String hex) {
+        StringBuilder sb = new StringBuilder();
+        for (String hexChar : hex.split("")) {
+            int dec = Integer.parseInt(hexChar, 16);
+            sb.append(addLeadingZeros(Integer.toBinaryString(dec)));
+        }
+        return sb.toString();
+    }
+
+    @NotNull
+    private String addLeadingZeros(String binaryString) {
+        StringBuilder sb = new StringBuilder(binaryString);
+        while (4 % sb.length() != 0 || sb.length() < 4) {
+            sb.insert(0, "0");
+        }
+        return sb.toString();
+    }
+
+    void printMatrix(int[][] matrix) {
+        for (int[] line : matrix) {
+            for (int number : line) {
+                System.out.print(number + "\t");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     @NotNull String readLinesToString() {
