@@ -2082,7 +2082,8 @@ public enum MyInput {
           "50: 10\n" + "52: 14\n" + "56: 12\n" + "58: 14\n" + "62: 14\n" + "64: 14\n" + "66: 12\n" + "68: 14\n" +
           "70: 14\n" + "72: 17\n" + "74: 14\n" + "76: 14\n" + "80: 20\n" + "82: 14\n" + "90: 24\n" + "92: 14\n" +
           "98: 14"),
-    DAY14("ljoxqyyw");
+    DAY14("ljoxqyyw"),
+    DAY15("Generator A starts with 116\n" + "Generator B starts with 299");
 
     private final String input;
 

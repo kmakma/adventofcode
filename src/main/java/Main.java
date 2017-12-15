@@ -71,9 +71,9 @@ public class Main {
             case 14:
                 new Day14();
                 break;
-//            case 15:
-//                new Day15();
-//                break;
+            case 15:
+                new Day15();
+                break;
 //            case 16:
 //                new Day16();
 //                break;

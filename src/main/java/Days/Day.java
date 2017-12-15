@@ -119,8 +119,6 @@ abstract class Day {
     }
 
     @Nullable List<RegisterInstruction> linesToRegisterInstructions() {
-        // TODO: 10.12.2017
-//        List<String> input = readLines();
         String input = readLinesToString();
 
         List<RegisterInstruction> regInstrs = new ArrayList<>();
@@ -142,7 +140,6 @@ abstract class Day {
         }
 
         return regInstrs;
-
     }
 
     @NotNull
@@ -279,5 +276,39 @@ abstract class Day {
             }
         } while (!(line == null || "".equals(line)));
         return decideIfOfficialInput(input.toString());
+    }
+
+    int[] specialLinesToIntArr() {
+        String input = readLinesToString();
+
+        int[] intArr = new int[2];
+        BufferedReader br = new BufferedReader(new StringReader(input));
+
+        String line;
+        while (true) {
+            try {
+                line = br.readLine();
+            } catch (IOException e) {
+                System.err.println(getClass() + ": Error while reading line!");
+                return null;
+            }
+            if (line != null && !"".equals(line)) {
+                String[] splitLine = line.split(" ");
+                try {
+                    if("A".equals(splitLine[1])) {
+                        intArr[0]=Integer.parseInt(splitLine[4]);
+                    } else if("B".equals(splitLine[1])) {
+                        intArr[1]=Integer.parseInt(splitLine[4]);
+                    } else {
+                        return null;
+                    }
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    return null;
+                }
+            } else {
+                break;
+            }
+        }
+        return intArr;
     }
 }
