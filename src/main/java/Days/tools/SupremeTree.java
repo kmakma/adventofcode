@@ -1,15 +1,13 @@
 package Days.tools;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static Days.tools.Tools.splitInput;
 
 public class SupremeTree {
 
@@ -54,30 +52,6 @@ public class SupremeTree {
     private Integer parseWeight(String weightString) {
         String weight = weightString.replace("(", "").replace(")", "");
         return Integer.valueOf(weight);
-    }
-
-    @Nullable
-    private List<String[]> splitInput(String input) {
-        BufferedReader br = new BufferedReader(new StringReader(input));
-        String line;
-        List<String[]> splitLines = new ArrayList<>();
-        do {
-            try {
-                line = br.readLine();
-            } catch (IOException e) {
-                System.err.println("SupremeTree: IOException while reading string.");
-                return null;
-            }
-            if (line == null) {
-                break;
-            }
-            String[] splitLine = line.trim().split(" ", 3);
-            if (splitLine.length >= 2) {
-                splitLines.add(splitLine);
-            }
-        } while (!"".equals(line));
-
-        return splitLines;
     }
 
     private void addNodes(Map<String, Integer> nodesMap) {
