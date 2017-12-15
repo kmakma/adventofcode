@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * solution part one: 8316
  * <p>
- * solution part two: ___
+ * solution part two: 1074
  *
  * @see <a href="http://adventofcode.com/2017/day/14">Advent of Code: Day 14</a>
  */
