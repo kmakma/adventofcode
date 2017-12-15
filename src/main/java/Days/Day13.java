@@ -17,7 +17,7 @@ public class Day13 extends Day {
     private Map<Integer, Integer> scannerRanges;
 
     public Day13() {
-        System.out.println("\n--- Day13: Packet Scanners ---");
+        System.out.println("\n--- Day 13: Packet Scanners ---");
         // input
         scannerRanges = linesToIntMap();
         // wörk

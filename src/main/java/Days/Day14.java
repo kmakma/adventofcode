@@ -15,7 +15,7 @@ import java.util.List;
 public class Day14 extends Day {
 
     public Day14() {
-        System.out.println("\n--- Day14: Disk Defragmentation ---");
+        System.out.println("\n--- Day 14: Disk Defragmentation ---");
         // input
         String input = readLine();
         List<String> hashInput = generateHashInput(input);

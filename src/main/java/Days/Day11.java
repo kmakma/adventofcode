@@ -17,7 +17,7 @@ public class Day11 extends Day {
     private int posX = 0;
 
     public Day11() {
-        System.out.println("\n--- Day11: Hex Ed ---");
+        System.out.println("\n--- Day 11: Hex Ed ---");
         // input
         List<String> input = lineToStringList(",");
         // wörk
