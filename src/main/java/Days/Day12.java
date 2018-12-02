@@ -20,16 +20,24 @@ public class Day12 extends Day {
         // input
         VillageGraph village = new VillageGraph(readLinesToString());
         // wörk
-        findNetworkSize(village);
+        findGroupSize(village);
+        findGroupCount(village);
         System.out.println();
         // finished
+    }
+
+    private void findGroupCount(VillageGraph village) {
+        village.countNeighbourhoods();
+
+        System.out.println("Solution Part Two: n/a");
+//        System.out.println("\t" + neighbourhood.size());
     }
 
     public static void main(String[] args) {
         new Day12();
     }
 
-    private void findNetworkSize(VillageGraph village) {
+    private void findGroupSize(VillageGraph village) {
         Set<Villager> neighbourhood = village.getNeighbourhoodOf(0);
         System.out.println("Solution Part One:");
         System.out.println("\t" + neighbourhood.size());

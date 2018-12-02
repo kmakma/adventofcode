@@ -62,4 +62,13 @@ public class VillageGraph {
             }
         }
     }
+
+    public int countNeighbourhoods() {
+        List<Villager> villagersCopy = new ArrayList<>(villagers);
+        while(villagersCopy.size()>0) {
+
+        }
+
+        return 0;
+    }
 }
